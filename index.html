@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sirma Kipkurui's Portfolio</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
+      color: #333;
+    }
+    header {
+      background-color: #2c3e50;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+    nav ul {
+      display: flex;
+      list-style: none;
+      justify-content: center;
+      padding: 0;
+      margin: 0;
+    }
+    nav ul li {
+      margin: 0 15px;
+    }
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    section {
+      padding: 40px 20px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .section-title {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 24px;
+    }
+    .about, .projects, .contact {
+      margin-bottom: 60px;
+    }
+    .project-item {
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    footer {
+      background-color: #2c3e50;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Sirma Kipkurui's Portfolio</h1>
+    <nav>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="about" class="about">
+    <h2 class="section-title">About Me</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent at enim ac risus sagittis tincidunt a ac erat. Nullam auctor purus in massa eleifend, a efficitur orci bibendum. Vivamus consequat turpis nec dolor placerat tristique.</p>
+  </section>
+
+  <section id="projects" class="projects">
+    <h2 class="section-title">Projects</h2>
+    <div class="project-item">
+      <h3>Project 1</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vehicula nunc non lectus blandit, id feugiat elit sagittis.</p>
+    </div>
+    <div class="project-item">
+      <h3>Project 2</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vehicula nunc non lectus blandit, id feugiat elit sagittis.</p>
+    </div>
+    <div class="project-item">
+      <h3>Project 3</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vehicula nunc non lectus blandit, id feugiat elit sagittis.</p>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <h2 class="section-title">Contact</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut velit et libero aliquet ullamcorper a at sapien.</p>
+    <p>Email: sirma.kipkurui@example.com</p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Sirma Kipkurui. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.querySelectorAll('nav ul li a').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const section = document.querySelector(this.getAttribute('href'));
+        section.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
+</body>
+</html>
