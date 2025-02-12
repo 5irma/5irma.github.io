@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Goat Herd Monitoring Dashboard</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js" defer></script>
 </head>
 <body class="bg-gray-100">
   <header class="bg-green-600 p-4 text-white text-center text-2xl font-bold">
@@ -41,16 +41,15 @@
     </table>
   </div>
 
-  <script>
-    const supabaseUrl = "https://qpwlcnpdjbeosbppfpke.supabase.co"
-    const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFwd2xjbnBkamJlb3NicHBmcGtlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzkzNjkyMjIsImV4cCI6MjA1NDk0NTIyMn0.SoPJ1ZlXu83CqrpLlwU7ak5UYlWTYaLhE8zIX2lSJYM"; // Replace with your Supabase URL
-    // Replace with your Supabase anon key
+  <script defer>
+    const supabaseUrl = "https://qpwlcnpdjbeosbppfpke.supabase.co"; 
+    const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFwd2xjbnBkamJlb3NicHBmcGtlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzkzNjkyMjIsImV4cCI6MjA1NDk0NTIyMn0.SoPJ1ZlXu83CqrpLlwU7ak5UYlWTYaLhE8zIX2lSJYM"; 
     const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
     async function fetchGoatData() {
       try {
         const { data, error } = await supabase
-          .from('GOATS') // Replace with your actual Supabase table name
+          .from('goats') // Replace with your actual Supabase table name
           .select('*');
 
         if (error) {
