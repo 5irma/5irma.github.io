@@ -49,7 +49,7 @@
     async function fetchGoatData() {
       try {
         const { data, error } = await supabase
-          .from('goats') // Replace with your actual Supabase table name
+          .from('GOATS') // Replace with your actual Supabase table name
           .select('*');
 
         if (error) {
