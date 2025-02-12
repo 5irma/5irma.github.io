@@ -3,102 +3,76 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Goat Herd Monitoring Dashboard</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js" defer></script>
+  <title>Goat Herd Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 10px;
+      border: 1px solid #ddd;
+    }
+    th {
+      background-color: #4CAF50;
+      color: white;
+    }
+  </style>
 </head>
-<body class="bg-gray-100">
-  <header class="bg-green-600 p-4 text-white text-center text-2xl font-bold">
-    Goat Herd Monitoring Dashboard
-  </header>
-  
-  <div class="p-4">
-    <div class="mb-4">
-      <input 
-        type="text" 
-        id="searchBar" 
-        placeholder="Search goats by RFID, breed, or farm..." 
-        class="w-full p-2 border rounded shadow-sm" 
-        onkeyup="filterTable()"
-      />
-    </div>
+<body>
+  <h1>Goat Herd Dashboard</h1>
+  <table id="goatTable">
+    <thead>
+      <tr>
+        <th>RFID</th>
+        <th>Date of Birth</th>
+        <th>Gender</th>
+        <th>Parent RFID</th>
+        <th>Offspring RFID</th>
+        <th>Weight (kg)</th>
+        <th>Breed</th>
+        <th>Farm Name</th>
+        <th>Disease Status</th>
+        <th>Vaccination</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
 
-    <table id="goatTable" class="w-full table-auto bg-white shadow-md rounded">
-      <thead class="bg-green-700 text-white">
-        <tr>
-          <th class="p-2">RFID</th>
-          <th class="p-2">Date of Birth</th>
-          <th class="p-2">Gender</th>
-          <th class="p-2">Parent RFID</th>
-          <th class="p-2">Weight (kg)</th>
-          <th class="p-2">Breed</th>
-          <th class="p-2">Farm Name</th>
-          <th class="p-2">Disease Status</th>
-          <th class="p-2">Vaccination</th>
-        </tr>
-      </thead>
-      <tbody id="goatTableBody"></tbody>
-    </table>
-  </div>
-
-  <script defer>
-    const supabaseUrl = "https://qpwlcnpdjbeosbppfpke.supabase.co"; 
-    const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFwd2xjbnBkamJlb3NicHBmcGtlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzkzNjkyMjIsImV4cCI6MjA1NDk0NTIyMn0.SoPJ1ZlXu83CqrpLlwU7ak5UYlWTYaLhE8zIX2lSJYM"; 
-    const supabase = supabase.createClient(supabaseUrl, supabaseKey);
-
+  <script>
     async function fetchGoatData() {
       try {
-        const { data, error } = await supabase
-          .from('goats') // Replace with your actual Supabase table name
-          .select('*');
+        const response = await fetch("http://localhost:3000/api/goats");
+        const data = await response.json();
+        const tableBody = document.getElementById("goatTable").querySelector("tbody");
 
-        if (error) {
-          console.error('Error fetching data:', error);
-          return;
-        }
-
-        populateTable(data);
-      } catch (error) {
-        console.error('Unexpected error:', error);
+        data.forEach(goat => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${goat.RFID}</td>
+            <td>${goat["Date of Birth"]}</td>
+            <td>${goat.Gender}</td>
+            <td>${goat["Parent RFID"]}</td>
+            <td>${goat["Offspring RFID"]}</td>
+            <td>${goat["Weight (kg)"]}</td>
+            <td>${goat.Breed}</td>
+            <td>${goat["Farm Name"]}</td>
+            <td>${goat["Disease Status"]}</td>
+            <td>${goat.Vaccination}</td>
+          `;
+          tableBody.appendChild(row);
+        });
+      } catch (err) {
+        console.error("Failed to fetch goat data:", err);
       }
     }
 
-    function populateTable(goatData) {
-      const tableBody = document.getElementById('goatTableBody');
-      tableBody.innerHTML = '';
-
-      goatData.forEach(goat => {
-        const row = document.createElement('tr');
-        row.className = "border-b hover:bg-gray-100";
-
-        row.innerHTML = `
-          <td class="p-2">${goat.RFID}</td>
-          <td class="p-2">${goat["Date of Birth"]}</td>
-          <td class="p-2">${goat.Gender}</td>
-          <td class="p-2">${goat["Parent RFID"] || "N/A"}</td>
-          <td class="p-2">${goat["Weight (kg)"]}</td>
-          <td class="p-2">${goat.Breed}</td>
-          <td class="p-2">${goat["Farm Name"]}</td>
-          <td class="p-2">${goat["Disease Status"]}</td>
-          <td class="p-2">${goat.Vaccination}</td>
-        `;
-
-        tableBody.appendChild(row);
-      });
-    }
-
-    function filterTable() {
-      const searchTerm = document.getElementById('searchBar').value.toLowerCase();
-      const rows = document.querySelectorAll('#goatTableBody tr');
-
-      rows.forEach(row => {
-        const cells = Array.from(row.getElementsByTagName('td'));
-        const match = cells.some(cell => cell.textContent.toLowerCase().includes(searchTerm));
-        row.style.display = match ? '' : 'none';
-      });
-    }
-
-    // Fetch data when the page loads
     fetchGoatData();
   </script>
 </body>
