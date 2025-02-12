@@ -42,8 +42,9 @@
   </div>
 
   <script>
-    const supabaseUrl = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFwd2xjbnBkamJlb3NicHBmcGtlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzkzNjkyMjIsImV4cCI6MjA1NDk0NTIyMn0.SoPJ1ZlXu83CqrpLlwU7ak5UYlWTYaLhE8zIX2lSJYM"; // Replace with your Supabase URL
-    const supabaseKey = "https://qpwlcnpdjbeosbppfpke.supabase.co"; // Replace with your Supabase anon key
+    const supabaseUrl = "https://qpwlcnpdjbeosbppfpke.supabase.co"
+    const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFwd2xjbnBkamJlb3NicHBmcGtlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzkzNjkyMjIsImV4cCI6MjA1NDk0NTIyMn0.SoPJ1ZlXu83CqrpLlwU7ak5UYlWTYaLhE8zIX2lSJYM"; // Replace with your Supabase URL
+"; // Replace with your Supabase anon key
     const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
     async function fetchGoatData() {
